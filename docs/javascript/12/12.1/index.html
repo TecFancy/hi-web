@@ -1,0 +1,216 @@
+<!doctype html><html lang=zh dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="window 对象 #  BOM 的核心是 window 对象，表示浏览器的实例。window 对象在浏览器中有两重身份，一个是 ECMAScript 中的 Global 对象，另一个就是浏览器窗口的 JavaScript 接口。这意味着网页中定义的所有对象、变量和函数都以 window 作为其 Global 对象，都可以访问其上定义的 parseInt()等全局方法。
+注意 因为 window 对象的属性在全局作用域中有效，所以很多浏览器 API 及相关构造函数都以 window 对象属性的形式暴露出来。这些 API 将在全书各章中介绍，特别是第 20 章。
+另外，由于实现不同，某些 window 对象的属性在不同浏览器间可能差异很大。本篇不会介绍已经废弃的、非标准化或特定于浏览器的 window 属性。
+ Global 作用域 #  因为 window 对象被复用为 ECMAScript 的 Global 对象，所以通过 var 声明的所有全局变量和函数都会变成 window 对象的属性和方法。比如：
+var age = 29; var sayAge = () => alert(this.age); alert(window.age); // 29 sayAge(); // 29 window.sayAge(); // 29 这里，变量 age 和函数 sayAge()被定义在全局作用域中，它们自动成为了 window 对象的成员。因此，变量 age 可以通过 window."><meta name=theme-color content="#FFFFFF"><meta property="og:title" content="window 对象"><meta property="og:description" content="window 对象 #  BOM 的核心是 window 对象，表示浏览器的实例。window 对象在浏览器中有两重身份，一个是 ECMAScript 中的 Global 对象，另一个就是浏览器窗口的 JavaScript 接口。这意味着网页中定义的所有对象、变量和函数都以 window 作为其 Global 对象，都可以访问其上定义的 parseInt()等全局方法。
+注意 因为 window 对象的属性在全局作用域中有效，所以很多浏览器 API 及相关构造函数都以 window 对象属性的形式暴露出来。这些 API 将在全书各章中介绍，特别是第 20 章。
+另外，由于实现不同，某些 window 对象的属性在不同浏览器间可能差异很大。本篇不会介绍已经废弃的、非标准化或特定于浏览器的 window 属性。
+ Global 作用域 #  因为 window 对象被复用为 ECMAScript 的 Global 对象，所以通过 var 声明的所有全局变量和函数都会变成 window 对象的属性和方法。比如：
+var age = 29; var sayAge = () => alert(this.age); alert(window.age); // 29 sayAge(); // 29 window.sayAge(); // 29 这里，变量 age 和函数 sayAge()被定义在全局作用域中，它们自动成为了 window 对象的成员。因此，变量 age 可以通过 window."><meta property="og:type" content="article"><meta property="og:url" content="https://hi-web.io/docs/javascript/12/12.1/"><meta property="article:section" content="docs"><title>window 对象 | Hi Web</title><link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png type=image/x-icon><link rel=stylesheet href=/book.min.3e90539cf7130f0a89ba2f8b9f54ac5e5ecdd1fa345b6c8e3e5a83ec6f19ec8e.css integrity="sha256-PpBTnPcTDwqJui+Ln1SsXl7N0fo0W2yOPlqD7G8Z7I4=" crossorigin=anonymous><script defer src=/flexsearch.min.js></script><script defer src=/zh.search.min.a53f7096b2565476c1928b72df9484e169e2a670b1e3747ea341515c4930413f.js integrity="sha256-pT9wlrJWVHbBkoty35SE4WnipnCx43R+o0FRXEkwQT8=" crossorigin=anonymous></script><script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a href=/><span>Hi Web</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=搜索 aria-label=搜索 maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li class=book-section-flat><a href=https://hi-web.io/docs/javascript/>Javascript</a><ul><li><input type=checkbox id=section-a98eae978127bafe5d9b0cc6fcfe8d1b class=toggle>
+<label for=section-a98eae978127bafe5d9b0cc6fcfe8d1b class="flex justify-between"><a href=https://hi-web.io/docs/javascript/1/>什么是 JavaScript</a></label><ul><li><a href=https://hi-web.io/docs/javascript/1/1.1/>简短的历史回顾</a></li><li><a href=https://hi-web.io/docs/javascript/1/1.2/>JavaScript 实现</a></li><li><a href=https://hi-web.io/docs/javascript/1/1.3/>JavaScript 版本</a></li><li><a href=https://hi-web.io/docs/javascript/1/1.4/>小结</a></li></ul></li><li><input type=checkbox id=section-13c960072f37f61a8695a75afa03bfa5 class=toggle>
+<label for=section-13c960072f37f61a8695a75afa03bfa5 class="flex justify-between"><a href=https://hi-web.io/docs/javascript/2/>HTML 中的 JavaScript</a></label><ul><li><a href=https://hi-web.io/docs/javascript/2/2.1/>&lt;script> 元素</a></li><li><a href=https://hi-web.io/docs/javascript/2/2.2/>行内代码与外部文件</a></li><li><a href=https://hi-web.io/docs/javascript/2/2.3/>文档模式</a></li><li><a href=https://hi-web.io/docs/javascript/2/2.4/>&lt;noscript> 元素</a></li><li><a href=https://hi-web.io/docs/javascript/2/2.5/>小结</a></li></ul></li><li><input type=checkbox id=section-6aa73d0047b6c4a47e48010e1ab6843e class=toggle>
+<label for=section-6aa73d0047b6c4a47e48010e1ab6843e class="flex justify-between"><a href=https://hi-web.io/docs/javascript/3/>语言基础</a></label><ul><li><a href=https://hi-web.io/docs/javascript/3/3.1/>语法</a></li></ul></li><li><input type=checkbox id=section-0517b866fbc9f4a1231cd89e84602147 class=toggle>
+<label for=section-0517b866fbc9f4a1231cd89e84602147 class="flex justify-between"><a href=https://hi-web.io/docs/javascript/4/>变量、作用域与内存</a></label><ul><li><a href=https://hi-web.io/docs/javascript/4/4.1/>原始值与引用值</a></li></ul></li><li><input type=checkbox id=section-f0099a2820f72b7cbd5e830b9a6f653e class=toggle>
+<label for=section-f0099a2820f72b7cbd5e830b9a6f653e class="flex justify-between"><a href=https://hi-web.io/docs/javascript/5/>基本引用类型</a></label><ul><li><a href=https://hi-web.io/docs/javascript/5/5.1/>Date</a></li></ul></li><li><input type=checkbox id=section-e50f1bea1c6f86dc765d50c5836823cb class=toggle>
+<label for=section-e50f1bea1c6f86dc765d50c5836823cb class="flex justify-between"><a href=https://hi-web.io/docs/javascript/6/>集合引用类型</a></label><ul><li><a href=https://hi-web.io/docs/javascript/6/6.1/>Object</a></li></ul></li><li><input type=checkbox id=section-7e9f9df9783a9fed06a027def220f1c5 class=toggle>
+<label for=section-7e9f9df9783a9fed06a027def220f1c5 class="flex justify-between"><a href=https://hi-web.io/docs/javascript/7/>迭代器与生成器</a></label><ul><li><a href=https://hi-web.io/docs/javascript/7/7.1/>理解迭代</a></li></ul></li><li><input type=checkbox id=section-ce2e75ee3c4bd5b8fcad41ee49cf5a84 class=toggle>
+<label for=section-ce2e75ee3c4bd5b8fcad41ee49cf5a84 class="flex justify-between"><a href=https://hi-web.io/docs/javascript/8/>对象、类与面向对象编程</a></label><ul><li><a href=https://hi-web.io/docs/javascript/8/8.1/>理解对象</a></li></ul></li><li><input type=checkbox id=section-0c16022b762653ac1125e9cf6c7eab01 class=toggle>
+<label for=section-0c16022b762653ac1125e9cf6c7eab01 class="flex justify-between"><a href=https://hi-web.io/docs/javascript/9/>代理与反射</a></label><ul><li><a href=https://hi-web.io/docs/javascript/9/9.1/>代理基础</a></li></ul></li><li><input type=checkbox id=section-d15886a42b556e7006a9b0ee252baf12 class=toggle>
+<label for=section-d15886a42b556e7006a9b0ee252baf12 class="flex justify-between"><a href=https://hi-web.io/docs/javascript/10/>函数</a></label><ul><li><a href=https://hi-web.io/docs/javascript/10/10.1/>箭头函数</a></li></ul></li><li><input type=checkbox id=section-fa5c8de9ea31d3b55b3ecfdc90271591 class=toggle>
+<label for=section-fa5c8de9ea31d3b55b3ecfdc90271591 class="flex justify-between"><a href=https://hi-web.io/docs/javascript/11/>期约与异步函数</a></label><ul><li><a href=https://hi-web.io/docs/javascript/11/11.1/>异步编程</a></li></ul></li><li><input type=checkbox id=section-d963f2603cce19cfc287fc10ec5a749b class=toggle checked>
+<label for=section-d963f2603cce19cfc287fc10ec5a749b class="flex justify-between"><a href=https://hi-web.io/docs/javascript/12/>BOM</a></label><ul><li><a href=https://hi-web.io/docs/javascript/12/12.1/ class=active>window 对象</a></li></ul></li></ul></li></ul></nav><script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label>
+<strong>window 对象</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#global-作用域>Global 作用域</a></li><li><a href=#窗口关系>窗口关系</a></li><li><a href=#窗口位置与像素比>窗口位置与像素比</a></li><li><a href=#窗口大小>窗口大小</a></li><li><a href=#视口位置>视口位置</a></li><li><a href=#导航与打开新窗口>导航与打开新窗口</a><ul><li><a href=#弹出窗口>弹出窗口</a></li><li><a href=#安全限制>安全限制</a></li><li><a href=#弹窗屏蔽程序>弹窗屏蔽程序</a></li></ul></li><li><a href=#定时器>定时器</a></li><li><a href=#系统对话框>系统对话框</a></li></ul></nav></aside></header><article class=markdown><h1 id=window-对象><code>window</code> 对象
+<a class=anchor href=#window-%e5%af%b9%e8%b1%a1>#</a></h1><p>BOM 的核心是 window 对象，表示浏览器的实例。window 对象在浏览器中有两重身份，一个是 ECMAScript 中的 Global 对象，另一个就是浏览器窗口的 JavaScript 接口。这意味着网页中定义的所有对象、变量和函数都以 window 作为其 Global 对象，都可以访问其上定义的 parseInt()等全局方法。</p><blockquote class="book-hint warning"><p><strong>注意</strong>
+因为 window 对象的属性在全局作用域中有效，所以很多浏览器 API 及相关构造函数都以 window 对象属性的形式暴露出来。这些 API 将在全书各章中介绍，特别是第 20 章。</p><p>另外，由于实现不同，某些 window 对象的属性在不同浏览器间可能差异很大。本篇不会介绍已经废弃的、非标准化或特定于浏览器的 window 属性。</p></blockquote><h2 id=global-作用域>Global 作用域
+<a class=anchor href=#global-%e4%bd%9c%e7%94%a8%e5%9f%9f>#</a></h2><p>因为 window 对象被复用为 ECMAScript 的 Global 对象，所以通过 var 声明的所有全局变量和函数都会变成 window 对象的属性和方法。比如：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#66d9ef>var</span> <span style=color:#a6e22e>age</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>29</span>;
+<span style=color:#66d9ef>var</span> <span style=color:#a6e22e>sayAge</span> <span style=color:#f92672>=</span> () =&gt; <span style=color:#a6e22e>alert</span>(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>age</span>);
+
+<span style=color:#a6e22e>alert</span>(window.<span style=color:#a6e22e>age</span>); <span style=color:#75715e>// 29
+</span><span style=color:#75715e></span><span style=color:#a6e22e>sayAge</span>(); <span style=color:#75715e>// 29
+</span><span style=color:#75715e></span>window.<span style=color:#a6e22e>sayAge</span>(); <span style=color:#75715e>// 29
+</span></code></pre></div><p>这里，变量 age 和函数 sayAge()被定义在全局作用域中，它们自动成为了 window 对象的成员。因此，变量 age 可以通过 window.age 来访问，而函数 sayAge()也可以通过 window.sayAge()来访问。因为 sayAge()存在于全局作用域，this.age 映射到 window.age，所以就可以显示正确的结果了。</p><p>如果在这里使用 let 或 const 替代 var，则不会把变量添加给全局对象：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>age</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>29</span>;
+<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>sayAge</span> <span style=color:#f92672>=</span> () =&gt; <span style=color:#a6e22e>alert</span>(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>age</span>);
+
+<span style=color:#a6e22e>alert</span>(window.<span style=color:#a6e22e>age</span>); <span style=color:#75715e>// undefined
+</span><span style=color:#75715e></span><span style=color:#a6e22e>sayAge</span>(); <span style=color:#75715e>// undefined
+</span><span style=color:#75715e></span>window.<span style=color:#a6e22e>sayAge</span>(); <span style=color:#75715e>// TypeError: window.sayAge is not a function
+</span></code></pre></div><p>另外，访问未声明的变量会抛出错误，但是可以在 window 对象上查询是否存在可能未声明的变量。比如：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#75715e>// 这会导致抛出错误，因为oldValue没有声明
+</span><span style=color:#75715e></span><span style=color:#66d9ef>var</span> <span style=color:#a6e22e>newValue</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>oldValue</span>;
+<span style=color:#75715e>// 这不会抛出错误，因为这里是属性查询
+</span><span style=color:#75715e>// newValue会被设置为undefined
+</span><span style=color:#75715e></span><span style=color:#66d9ef>var</span> <span style=color:#a6e22e>newValue</span> <span style=color:#f92672>=</span> window.<span style=color:#a6e22e>oldValue</span>;
+</code></pre></div><p>记住，JavaScript 中有很多对象都暴露在全局作用域中，比如 location 和 navigator（本篇后面都会讨论），因而它们也是 window 对象的属性。</p><h2 id=窗口关系>窗口关系
+<a class=anchor href=#%e7%aa%97%e5%8f%a3%e5%85%b3%e7%b3%bb>#</a></h2><p>top 对象始终指向最上层（最外层）窗口，即浏览器窗口本身。而 parent 对象则始终指向当前窗口的父窗口。如果当前窗口是最上层窗口，则 parent 等于 top（都等于 window）。最上层的 window 如果不是通过 window.open()打开的，那么其 name 属性就不会包含值，本篇后面会讨论。</p><p>还有一个 self 对象，它是终极 window 属性，始终会指向 window。实际上，self 和 window 就是同一个对象。之所以还要暴露 self，就是为了和 top、parent 保持一致。</p><p>这些属性都是 window 对象的属性，因此访问 window.parent、window.top 和 window.self 都可以。这意味着可以把访问多个窗口的 window 对象串联起来，比如 window.parent.parent。</p><h2 id=窗口位置与像素比>窗口位置与像素比
+<a class=anchor href=#%e7%aa%97%e5%8f%a3%e4%bd%8d%e7%bd%ae%e4%b8%8e%e5%83%8f%e7%b4%a0%e6%af%94>#</a></h2><p>window 对象的位置可以通过不同的属性和方法来确定。现代浏览器提供了 screenLeft 和 screenTop 属性，用于表示窗口相对于屏幕左侧和顶部的位置 ，返回值的单位是 CSS 像素。</p><p>可以使用 moveTo()和 moveBy()方法移动窗口。这两个方法都接收两个参数，其中 moveTo()接收要移动到的新位置的绝对坐标 <code>x</code> 和 <code>y</code>；而 moveBy()则接收相对当前位置在两个方向上移动的像素数。比如：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#75715e>// 把窗口移动到左上角
+</span><span style=color:#75715e></span>window.<span style=color:#a6e22e>moveTo</span>(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>);
+
+<span style=color:#75715e>// 把窗口向下移动100像素
+</span><span style=color:#75715e></span>window.<span style=color:#a6e22e>moveBy</span>(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>100</span>);
+
+<span style=color:#75715e>// 把窗口移动到坐标位置(200, 300)
+</span><span style=color:#75715e></span>window.<span style=color:#a6e22e>moveTo</span>(<span style=color:#ae81ff>200</span>, <span style=color:#ae81ff>300</span>);
+
+<span style=color:#75715e>// 把窗口向左移动50像素
+</span><span style=color:#75715e></span>window.<span style=color:#a6e22e>moveBy</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>50</span>, <span style=color:#ae81ff>0</span>);
+</code></pre></div><p>依浏览器而定，以上方法可能会被部分或全部禁用。</p><p><strong>像素比</strong></p><p>CSS 像素是 Web 开发中使用的统一像素单位。这个单位的背后其实是一个角度：0.0213°。如果屏幕距离人眼是一臂长，则以这个角度计算的 CSS 像素大小约为 1/96 英寸。这样定义像素大小是为了在不同设备上统一标准。比如，低分辨率平板设备上 12 像素（CSS 像素）的文字应该与高清 4K 屏幕下 12 像素（CSS 像素）的文字具有相同大小。这就带来了一个问题，不同像素密度的屏幕下就会有不同的缩放系数，以便把物理像素（屏幕实际的分辨率）转换为 CSS 像素（浏览器报告的虚拟分辨率）。</p><p>举个例子，手机屏幕的物理分辨率可能是 1920×1080，但因为其像素可能非常小，所以浏览器就需要将其分辨率降为较低的逻辑分辨率，比如 640×320。这个物理像素与 CSS 像素之间的转换比率由 window.devicePixelRatio 属性提供。对于分辨率从 1920×1080 转换为 640×320 的设备，window.devicePixelRatio 的值就是 3。这样一来，12 像素（CSS 像素）的文字实际上就会用 36 像素的物理像素来显示。</p><p>window.devicePixelRatio 实际上与每英寸像素数（DPI，dots per inch）是对应的。DPI 表示单位像素密度，而 window.devicePixelRatio 表示物理像素与逻辑像素之间的缩放系数。</p><h2 id=窗口大小>窗口大小
+<a class=anchor href=#%e7%aa%97%e5%8f%a3%e5%a4%a7%e5%b0%8f>#</a></h2><p>在不同浏览器中确定浏览器窗口大小没有想象中那么容易。所有现代浏览器都支持 4 个属性：innerWidth、innerHeight、outerWidth 和 outerHeight。outerWidth 和 outerHeight 返回浏览器窗口自身的大小（不管是在最外层 window 上使用，还是在窗格中使用）。innerWidth 和 innerHeight 返回浏览器窗口中页面视口的大小（不包含浏览器边框和工具栏）。</p><p>document.documentElement.clientWidth 和 document.documentElement.clientHeight 返回页面视口的宽度和高度。</p><p>浏览器窗口自身的精确尺寸不好确定，但可以确定页面视口的大小，如下所示：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>pageWidth</span> <span style=color:#f92672>=</span> window.<span style=color:#a6e22e>innerWidth</span>,
+  <span style=color:#a6e22e>pageHeight</span> <span style=color:#f92672>=</span> window.<span style=color:#a6e22e>innerHeight</span>;
+
+<span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>typeof</span> <span style=color:#a6e22e>pageWidth</span> <span style=color:#f92672>!=</span> <span style=color:#e6db74>&#34;number&#34;</span>) {
+  <span style=color:#66d9ef>if</span> (document.<span style=color:#a6e22e>compatMode</span> <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;CSS1Compat&#34;</span>) {
+    <span style=color:#a6e22e>pageWidth</span> <span style=color:#f92672>=</span> document.<span style=color:#a6e22e>documentElement</span>.<span style=color:#a6e22e>clientWidth</span>;
+    <span style=color:#a6e22e>pageHeight</span> <span style=color:#f92672>=</span> document.<span style=color:#a6e22e>documentElement</span>.<span style=color:#a6e22e>clientHeight</span>;
+  } <span style=color:#66d9ef>else</span> {
+    <span style=color:#a6e22e>pageWidth</span> <span style=color:#f92672>=</span> document.<span style=color:#a6e22e>body</span>.<span style=color:#a6e22e>clientWidth</span>;
+    <span style=color:#a6e22e>pageHeight</span> <span style=color:#f92672>=</span> document.<span style=color:#a6e22e>body</span>.<span style=color:#a6e22e>clientHeight</span>;
+  }
+}
+</code></pre></div><p>这里，先将 pageWidth 和 pageHeight 的值分别设置为 window.innerWidth 和 window.innerHeight。然后，检查 pageWidth 是不是一个数值，如果不是则通过 document.compatMode 来检查页面是否处于标准模式。如果是，则使用 document.documentElement.clientWidth 和 document.documentElement.clientHeight；否则，就使用 document.body.clientWidth 和 document.body.clientHeight。</p><p>在移动设备上，window.innerWidth 和 window.innerHeight 返回视口的大小，也就是屏幕上页面可视区域的大小。Mobile Internet Explorer 支持这些属性，但在 document.documentElement.clientWidth 和 document.documentElement.clientHeight 中提供了相同的信息。在放大或缩小页面时，这些值也会相应变化。</p><p>在其他移动浏览器中，document.documentElement.clientWidth 和 document.documentElement.clientHeight 返回的布局视口的大小，即渲染页面的实际大小。布局视口是相对于可见视口的概念，可见视口只能显示整个页面的一小部分。Mobile Internet Explorer 把布局视口的信息保存在 document.body.clientWidth 和 document.body.clientHeight 中。在放大或缩小页面时，这些值也会相应变化。</p><p>因为桌面浏览器的差异，所以需要先确定用户是不是在使用移动设备，然后再决定使用哪个属性。</p><blockquote class="book-hint warning">注意　手机视口的概念比较复杂，有各种各样的问题。如果读者在做移动开发，推荐阅读 Peter-Paul Koch 发表在 QuirksMode 网站上的文章“A Tale of Two Viewports— Part Two”。</blockquote><p>可以使用 resizeTo()和 resizeBy()方法调整窗口大小。这两个方法都接收两个参数，resizeTo()接收新的宽度和高度值，而 resizeBy()接收宽度和高度各要缩放多少。下面看个例子：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#75715e>// 缩放到100×100
+</span><span style=color:#75715e></span>window.<span style=color:#a6e22e>resizeTo</span>(<span style=color:#ae81ff>100</span>, <span style=color:#ae81ff>100</span>);
+
+<span style=color:#75715e>// 缩放到200×150
+</span><span style=color:#75715e></span>window.<span style=color:#a6e22e>resizeBy</span>(<span style=color:#ae81ff>100</span>, <span style=color:#ae81ff>50</span>);
+
+<span style=color:#75715e>// 缩放到300×300
+</span><span style=color:#75715e></span>window.<span style=color:#a6e22e>resizeTo</span>(<span style=color:#ae81ff>300</span>, <span style=color:#ae81ff>300</span>);
+</code></pre></div><p>与移动窗口的方法一样，缩放窗口的方法可能会被浏览器禁用，而且在某些浏览器中默认是禁用的。同样，缩放窗口的方法只能应用到最上层的 window 对象。</p><h2 id=视口位置>视口位置
+<a class=anchor href=#%e8%a7%86%e5%8f%a3%e4%bd%8d%e7%bd%ae>#</a></h2><p>浏览器窗口尺寸通常无法满足完整显示整个页面，为此用户可以通过滚动在有限的视口中查看文档。度量文档相对于视口滚动距离的属性有两对，返回相等的值：window.pageXoffset/window.scrollX 和 window.pageYoffset/window.scrollY。</p><p>可以使用 scroll()、scrollTo()和 scrollBy()方法滚动页面。这 3 个方法都接收表示相对视口距离的 <code>x</code> 和 <code>y</code> 坐标，这两个参数在前两个方法中表示要滚动到的坐标，在最后一个方法中表示滚动的距离。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#75715e>// 相对于当前视口向下滚动100像素
+</span><span style=color:#75715e></span>window.<span style=color:#a6e22e>scrollBy</span>(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>100</span>);
+
+<span style=color:#75715e>// 相对于当前视口向右滚动40像素
+</span><span style=color:#75715e></span>window.<span style=color:#a6e22e>scrollBy</span>(<span style=color:#ae81ff>40</span>, <span style=color:#ae81ff>0</span>);
+
+<span style=color:#75715e>// 滚动到页面左上角
+</span><span style=color:#75715e></span>window.<span style=color:#a6e22e>scrollTo</span>(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>);
+
+<span style=color:#75715e>// 滚动到距离屏幕左边及顶边各100像素的位置
+</span><span style=color:#75715e></span>window.<span style=color:#a6e22e>scrollTo</span>(<span style=color:#ae81ff>100</span>, <span style=color:#ae81ff>100</span>);
+</code></pre></div><p>这几个方法也都接收一个 ScrollToOptions 字典，除了提供偏移值，还可以通过 behavior 属性告诉浏览器是否平滑滚动。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#75715e>// 正常滚动
+</span><span style=color:#75715e></span>window.<span style=color:#a6e22e>scrollTo</span>({
+  <span style=color:#a6e22e>left</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>100</span>,
+  <span style=color:#a6e22e>top</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>100</span>,
+  <span style=color:#a6e22e>behavior</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;auto&#34;</span>,
+});
+
+<span style=color:#75715e>// 平滑滚动
+</span><span style=color:#75715e></span>window.<span style=color:#a6e22e>scrollTo</span>({
+  <span style=color:#a6e22e>left</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>100</span>,
+  <span style=color:#a6e22e>top</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>100</span>,
+  <span style=color:#a6e22e>behavior</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;smooth&#34;</span>,
+});
+</code></pre></div><h2 id=导航与打开新窗口>导航与打开新窗口
+<a class=anchor href=#%e5%af%bc%e8%88%aa%e4%b8%8e%e6%89%93%e5%bc%80%e6%96%b0%e7%aa%97%e5%8f%a3>#</a></h2><p>window.open()方法可以用于导航到指定 URL，也可以用于打开新浏览器窗口。这个方法接收 4 个参数：要加载的 URL、目标窗口、特性字符串和表示新窗口在浏览器历史记录中是否替代当前加载页面的布尔值。通常，调用这个方法时只传前 3 个参数，最后一个参数只有在不打开新窗口时才会使用。</p><p>如果 window.open()的第二个参数是一个已经存在的窗口或窗格（frame）的名字，则会在对应的窗口或窗格中打开 URL。下面是一个例子：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#75715e>// 与&lt;a href=&#34;http://www.wrox.com&#34; target=&#34;topFrame&#34;/&gt;相同
+</span><span style=color:#75715e></span>window.<span style=color:#a6e22e>open</span>(<span style=color:#e6db74>&#34;http://www.wrox.com/&#34;</span>, <span style=color:#e6db74>&#34;topFrame&#34;</span>);
+</code></pre></div><p>执行这行代码的结果就如同用户点击了一个 href 属性为"http://www.wrox.com"，target属性为"topFrame"的链接。如果有一个窗口名叫"topFrame"，则这个窗口就会打开这个URL；否则就会打开一个新窗口并将其命名为"topFrame"。第二个参数也可以是一个特殊的窗口名，比如_self、_parent、_top或_blank。</p><h3 id=弹出窗口>弹出窗口
+<a class=anchor href=#%e5%bc%b9%e5%87%ba%e7%aa%97%e5%8f%a3>#</a></h3><p>如果 window.open()的第二个参数不是已有窗口，则会打开一个新窗口或标签页。第三个参数，即特性字符串，用于指定新窗口的配置。如果没有传第三个参数，则新窗口（或标签页）会带有所有默认的浏览器特性（工具栏、地址栏、状态栏等都是默认配置）。如果打开的不是新窗口，则忽略第三个参数。</p><p>特性字符串是一个逗号分隔的设置字符串，用于指定新窗口包含的特性。下表列出了一些选项。</p><table><thead><tr><th>设置</th><th>值</th><th>说明</th></tr></thead><tbody><tr><td>fullscreen</td><td>&ldquo;yes"或"no&rdquo;</td><td>表示新窗口是否最大化。仅限 IE 支持</td></tr><tr><td>height</td><td>数值</td><td>新窗口高度。这个值不能小于 100</td></tr><tr><td>left</td><td>数值</td><td>新窗口的 x 轴坐标。这个值不能是负值</td></tr><tr><td>location</td><td>&ldquo;yes"或"no&rdquo;</td><td>表示是否显示地址栏。不同浏览器的默认值也不一样。在设置为"no"时，地址栏可能隐藏或禁用（取决于浏览器）</td></tr><tr><td>Menubar</td><td>&ldquo;yes"或"no&rdquo;</td><td>表示是否显示菜单栏。默认为"no"</td></tr><tr><td>resizable</td><td>&ldquo;yes"或"no&rdquo;</td><td>表示是否可以拖动改变新窗口大小。默认为"no"</td></tr><tr><td>scrollbars</td><td>&ldquo;yes"或"no&rdquo;</td><td>表示是否可以在内容过长时滚动。默认为"no"</td></tr><tr><td>status</td><td>&ldquo;yes"或"no&rdquo;</td><td>表示是否显示状态栏。不同浏览器的默认值也不一样</td></tr><tr><td>toolbar</td><td>&ldquo;yes"或"no&rdquo;</td><td>表示是否显示工具栏。默认为"no"</td></tr><tr><td>top</td><td>数值</td><td>新窗口的 y 轴坐标。这个值不能是负值</td></tr><tr><td>width</td><td>数值</td><td>新窗口的宽度。这个值不能小于 100</td></tr></tbody></table><p>这些设置需要以逗号分隔的名值对形式出现，其中名值对以等号连接。（特性字符串中不能包含空格。）来看下面的例子：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js>window.<span style=color:#a6e22e>open</span>(
+  <span style=color:#e6db74>&#34;http://www.wrox.com/&#34;</span>,
+  <span style=color:#e6db74>&#34;wroxWindow&#34;</span>,
+  <span style=color:#e6db74>&#34;height=400,width=400,top=10,left=10,resizable=yes&#34;</span>
+);
+</code></pre></div><p>这行代码会打开一个可缩放的新窗口，大小为 400 像素 ×400 像素，位于离屏幕左边及顶边各 10 像素的位置。</p><p>window.open()方法返回一个对新建窗口的引用。这个对象与普通 window 对象没有区别，只是为控制新窗口提供了方便。例如，某些浏览器默认不允许缩放或移动主窗口，但可能允许缩放或移动通过 window.open()创建的窗口。跟使用任何 window 对象一样，可以使用这个对象操纵新打开的窗口。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>wroxWin</span> <span style=color:#f92672>=</span> window.<span style=color:#a6e22e>open</span>(
+  <span style=color:#e6db74>&#34;http://www.wrox.com/&#34;</span>,
+  <span style=color:#e6db74>&#34;wroxWindow&#34;</span>,
+  <span style=color:#e6db74>&#34;height=400,width=400,top=10,left=10,resizable=yes&#34;</span>
+);
+
+<span style=color:#75715e>// 缩放
+</span><span style=color:#75715e></span><span style=color:#a6e22e>wroxWin</span>.<span style=color:#a6e22e>resizeTo</span>(<span style=color:#ae81ff>500</span>, <span style=color:#ae81ff>500</span>);
+
+<span style=color:#75715e>// 移动
+</span><span style=color:#75715e></span><span style=color:#a6e22e>wroxWin</span>.<span style=color:#a6e22e>moveTo</span>(<span style=color:#ae81ff>100</span>, <span style=color:#ae81ff>100</span>);
+</code></pre></div><p>还可以使用 close()方法像这样关闭新打开的窗口：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#a6e22e>wroxWin</span>.<span style=color:#a6e22e>close</span>();
+</code></pre></div><p>这个方法只能用于 window.open()创建的弹出窗口。虽然不可能不经用户确认就关闭主窗口，但弹出窗口可以调用 top.close()来关闭自己。关闭窗口以后，窗口的引用虽然还在，但只能用于检查其 closed 属性了：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#a6e22e>wroxWin</span>.<span style=color:#a6e22e>close</span>();
+<span style=color:#a6e22e>alert</span>(<span style=color:#a6e22e>wroxWin</span>.<span style=color:#a6e22e>closed</span>); <span style=color:#75715e>// true
+</span></code></pre></div><p>新创建窗口的 window 对象有一个属性 opener，指向打开它的窗口。这个属性只在弹出窗口的最上层 window 对象（top）有定义，是指向调用 window.open()打开它的窗口或窗格的指针。例如：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>wroxWin</span> <span style=color:#f92672>=</span> window.<span style=color:#a6e22e>open</span>(
+  <span style=color:#e6db74>&#34;http://www.wrox.com/&#34;</span>,
+  <span style=color:#e6db74>&#34;wroxWindow&#34;</span>,
+  <span style=color:#e6db74>&#34;height=400,width=400,top=10,left=10,resizable=yes&#34;</span>
+);
+
+<span style=color:#a6e22e>alert</span>(<span style=color:#a6e22e>wroxWin</span>.<span style=color:#a6e22e>opener</span> <span style=color:#f92672>===</span> window); <span style=color:#75715e>// true
+</span></code></pre></div><p>虽然新建窗口中有指向打开它的窗口的指针，但反之则不然。窗口不会跟踪记录自己打开的新窗口，因此开发者需要自己记录。</p><p>在某些浏览器中，每个标签页会运行在独立的进程中。如果一个标签页打开了另一个，而 window 对象需要跟另一个标签页通信，那么标签便不能运行在独立的进程中。在这些浏览器中，可以将新打开的标签页的 opener 属性设置为 null，表示新打开的标签页可以运行在独立的进程中。比如：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>wroxWin</span> <span style=color:#f92672>=</span> window.<span style=color:#a6e22e>open</span>(
+  <span style=color:#e6db74>&#34;http://www.wrox.com/&#34;</span>,
+  <span style=color:#e6db74>&#34;wroxWindow&#34;</span>,
+  <span style=color:#e6db74>&#34;height=400,width=400,top=10,left=10,resizable=yes&#34;</span>
+);
+
+<span style=color:#a6e22e>wroxWin</span>.<span style=color:#a6e22e>opener</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>;
+</code></pre></div><p>把 opener 设置为 null 表示新打开的标签页不需要与打开它的标签页通信，因此可以在独立进程中运行。这个连接一旦切断，就无法恢复了。</p><h3 id=安全限制>安全限制
+<a class=anchor href=#%e5%ae%89%e5%85%a8%e9%99%90%e5%88%b6>#</a></h3><p>弹出窗口有段时间被在线广告用滥了。很多在线广告会把弹出窗口伪装成系统对话框，诱导用户点击。因为长得像系统对话框，所以用户很难分清这些弹窗的来源。为了让用户能够区分清楚，浏览器开始对弹窗施加限制。</p><p>IE 的早期版本实现针对弹窗的多重安全限制，包括不允许创建弹窗或把弹窗移出屏幕之外，以及不允许隐藏状态栏等。从 IE7 开始，地址栏也不能隐藏了，而且弹窗默认是不能移动或缩放的。Firefox 1 禁用了隐藏状态栏的功能，因此无论 window.open()的特性字符串是什么，都不会隐藏弹窗的状态栏。Firefox 3 强制弹窗始终显示地址栏。Opera 只会在主窗口中打开新窗口，但不允许它们出现在系统对话框的位置。</p><p>此外，浏览器会在用户操作下才允许创建弹窗。在网页加载过程中调用 window.open()没有效果，而且还可能导致向用户显示错误。弹窗通常可能在鼠标点击或按下键盘中某个键的情况下才能打开。</p><blockquote class="book-hint warning"><strong>注意</strong>
+IE 对打开本地网页的窗口再弹窗解除了某些限制。同样的代码如果来自服务器，则会施加弹窗限制。</blockquote><h3 id=弹窗屏蔽程序>弹窗屏蔽程序
+<a class=anchor href=#%e5%bc%b9%e7%aa%97%e5%b1%8f%e8%94%bd%e7%a8%8b%e5%ba%8f>#</a></h3><p>所有现代浏览器都内置了屏蔽弹窗的程序，因此大多数意料之外的弹窗都会被屏蔽。在浏览器屏蔽弹窗时，可能会发生一些事。如果浏览器内置的弹窗屏蔽程序阻止了弹窗，那么 window.open()很可能会返回 null。此时，只要检查这个方法的返回值就可以知道弹窗是否被屏蔽了，比如：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>wroxWin</span> <span style=color:#f92672>=</span> window.<span style=color:#a6e22e>open</span>(<span style=color:#e6db74>&#34;http://www.wrox.com&#34;</span>, <span style=color:#e6db74>&#34;_blank&#34;</span>);
+<span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>wroxWin</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
+  <span style=color:#a6e22e>alert</span>(<span style=color:#e6db74>&#34;The popup was blocked!&#34;</span>);
+}
+</code></pre></div><p>在浏览器扩展或其他程序屏蔽弹窗时，window.open()通常会抛出错误。因此要准确检测弹窗是否被屏蔽，除了检测 window.open()的返回值，还要把它用 try/catch 包装起来，像这样：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>blocked</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>;
+
+<span style=color:#66d9ef>try</span> {
+  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>wroxWin</span> <span style=color:#f92672>=</span> window.<span style=color:#a6e22e>open</span>(<span style=color:#e6db74>&#34;http://www.wrox.com&#34;</span>, <span style=color:#e6db74>&#34;_blank&#34;</span>);
+  <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>wroxWin</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
+    <span style=color:#a6e22e>blocked</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
+  }
+} <span style=color:#66d9ef>catch</span> (<span style=color:#a6e22e>ex</span>) {
+  <span style=color:#a6e22e>blocked</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
+}
+<span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>blocked</span>) {
+  <span style=color:#a6e22e>alert</span>(<span style=color:#e6db74>&#34;The popup was blocked!&#34;</span>);
+}
+</code></pre></div><p>无论弹窗是用什么方法屏蔽的，以上代码都可以准确判断调用 window.open()的弹窗是否被屏蔽了。</p><blockquote class="book-hint warning"><strong>注意</strong>
+检查弹窗是否被屏蔽，不影响浏览器显示关于弹窗被屏蔽的消息。</blockquote><h2 id=定时器>定时器
+<a class=anchor href=#%e5%ae%9a%e6%97%b6%e5%99%a8>#</a></h2><p>JavaScript 在浏览器中是单线程执行的，但允许使用定时器指定在某个时间之后或每隔一段时间就执行相应的代码。setTimeout()用于指定在一定时间后执行某些代码，而 setInterval()用于指定每隔一段时间执行某些代码。</p><p>setTimeout()方法通常接收两个参数：要执行的代码和在执行回调函数前等待的时间（毫秒）。第一个参数可以是包含 JavaScript 代码的字符串（类似于传给 eval()的字符串）或者一个函数，比如：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#75715e>// 在1秒后显示警告框
+</span><span style=color:#75715e></span><span style=color:#a6e22e>setTimeout</span>(() =&gt; <span style=color:#a6e22e>alert</span>(<span style=color:#e6db74>&#34;Hello world!&#34;</span>), <span style=color:#ae81ff>1000</span>);
+</code></pre></div><p>第二个参数是要等待的毫秒数，而不是要执行代码的确切时间。JavaScript 是单线程的，所以每次只能执行一段代码。为了调度不同代码的执行，JavaScript 维护了一个任务队列。其中的任务会按照添加到队列的先后顺序执行。setTimeout()的第二个参数只是告诉 JavaScript 引擎在指定的毫秒数过后把任务添加到这个队列。如果队列是空的，则会立即执行该代码。如果队列不是空的，则代码必须等待前面的任务执行完才能执行。</p><p>调用 setTimeout()时，会返回一个表示该超时排期的数值 ID。这个超时 ID 是被排期执行代码的唯一标识符，可用于取消该任务。要取消等待中的排期任务，可以调用 clearTimeout()方法并传入超时 ID，如下面的例子所示：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#75715e>// 设置超时任务
+</span><span style=color:#75715e></span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>timeoutId</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>setTimeout</span>(() =&gt; <span style=color:#a6e22e>alert</span>(<span style=color:#e6db74>&#34;Hello world!&#34;</span>), <span style=color:#ae81ff>1000</span>);
+
+<span style=color:#75715e>// 取消超时任务
+</span><span style=color:#75715e></span><span style=color:#a6e22e>clearTimeout</span>(<span style=color:#a6e22e>timeoutId</span>);
+</code></pre></div><p>只要是在指定时间到达之前调用 clearTimeout()，就可以取消超时任务。在任务执行后再调用 clearTimeout()没有效果。</p><blockquote class="book-hint warning"><strong>注意</strong>
+所有超时执行的代码（函数）都会在全局作用域中的一个匿名函数中运行，因此函数中的 this 值在非严格模式下始终指向 window，而在严格模式下是 undefined。如果给 setTimeout()提供了一个箭头函数，那么 this 会保留为定义它时所在的词汇作用域。</blockquote><p>setInterval()与 setTimeout()的使用方法类似，只不过指定的任务会每隔指定时间就执行一次，直到取消循环定时或者页面卸载。setInterval()同样可以接收两个参数：要执行的代码（字符串或函数），以及把下一次执行定时代码的任务添加到队列要等待的时间（毫秒）。下面是一个例子：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#a6e22e>setInterval</span>(() =&gt; <span style=color:#a6e22e>alert</span>(<span style=color:#e6db74>&#34;Hello world!&#34;</span>), <span style=color:#ae81ff>10000</span>);
+</code></pre></div><blockquote class="book-hint warning"><strong>注意</strong>
+这里的关键点是，第二个参数，也就是间隔时间，指的是向队列添加新任务之前等待的时间。比如，调用 setInterval()的时间为 01:00:00，间隔时间为 3000 毫秒。这意味着 01:00:03 时，浏览器会把任务添加到执行队列。浏览器不关心这个任务什么时候执行或者执行要花多长时间。因此，到了 01:00:06，它会再向队列中添加一个任务。由此可看出，执行时间短、非阻塞的回调函数比较适合 setInterval()。</blockquote><p>setInterval()方法也会返回一个循环定时 ID，可以用于在未来某个时间点上取消循环定时。要取消循环定时，可以调用 clearInterval()并传入定时 ID。相对于 setTimeout()而言，取消定时的能力对 setInterval()更加重要。毕竟，如果一直不管它，那么定时任务会一直执行到页面卸载。下面是一个常见的例子：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>num</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>,
+  <span style=color:#a6e22e>intervalId</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>;
+<span style=color:#66d9ef>let</span> <span style=color:#a6e22e>max</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>10</span>;
+
+<span style=color:#66d9ef>let</span> <span style=color:#a6e22e>incrementNumber</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>function</span> () {
+  <span style=color:#a6e22e>num</span><span style=color:#f92672>++</span>;
+
+  <span style=color:#75715e>// 如果达到最大值，则取消所有未执行的任务
+</span><span style=color:#75715e></span>  <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>num</span> <span style=color:#f92672>==</span> <span style=color:#a6e22e>max</span>) {
+    <span style=color:#a6e22e>clearInterval</span>(<span style=color:#a6e22e>intervalId</span>);
+    <span style=color:#a6e22e>alert</span>(<span style=color:#e6db74>&#34;Done&#34;</span>);
+  }
+};
+
+<span style=color:#a6e22e>intervalId</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>setInterval</span>(<span style=color:#a6e22e>incrementNumber</span>, <span style=color:#ae81ff>500</span>);
+</code></pre></div><p>在这个例子中，变量 num 会每半秒递增一次，直至达到最大限制值。此时循环定时会被取消。这个模式也可以使用 setTimeout()来实现，比如：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>num</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+<span style=color:#66d9ef>let</span> <span style=color:#a6e22e>max</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>10</span>;
+<span style=color:#66d9ef>let</span> <span style=color:#a6e22e>incrementNumber</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>function</span> () {
+  <span style=color:#a6e22e>num</span><span style=color:#f92672>++</span>;
+
+  <span style=color:#75715e>// 如果还没有达到最大值，再设置一个超时任务
+</span><span style=color:#75715e></span>  <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>num</span> <span style=color:#f92672>&lt;</span> <span style=color:#a6e22e>max</span>) {
+    <span style=color:#a6e22e>setTimeout</span>(<span style=color:#a6e22e>incrementNumber</span>, <span style=color:#ae81ff>500</span>);
+  } <span style=color:#66d9ef>else</span> {
+    <span style=color:#a6e22e>alert</span>(<span style=color:#e6db74>&#34;Done&#34;</span>);
+  }
+};
+
+<span style=color:#a6e22e>setTimeout</span>(<span style=color:#a6e22e>incrementNumber</span>, <span style=color:#ae81ff>500</span>);
+</code></pre></div><p>注意在使用 setTimeout()时，不一定要记录超时 ID，因为它会在条件满足时自动停止，否则会自动设置另一个超时任务。这个模式是设置循环任务的推荐做法。setInterval()在实践中很少会在生产环境下使用，因为一个任务结束和下一个任务开始之间的时间间隔是无法保证的，有些循环定时任务可能会因此而被跳过。而像前面这个例子中一样使用 setTimeout()则能确保不会出现这种情况。一般来说，最好不要使用 setInterval()。</p><h2 id=系统对话框>系统对话框
+<a class=anchor href=#%e7%b3%bb%e7%bb%9f%e5%af%b9%e8%af%9d%e6%a1%86>#</a></h2><p>使用 alert()、confirm()和 prompt()方法，可以让浏览器调用系统对话框向用户显示消息。这些对话框与浏览器中显示的网页无关，而且也不包含 HTML。它们的外观由操作系统或者浏览器决定，无法使用 CSS 设置。此外，这些对话框都是同步的模态对话框，即在它们显示的时候，代码会停止执行，在它们消失以后，代码才会恢复执行。</p><p>alert()方法在本系列示例中经常用到。它接收一个要显示给用户的字符串。与 console.log 可以接收任意数量的参数且能一次性打印这些参数不同，alert()只接收一个参数。调用 alert()时，传入的字符串会显示在一个系统对话框中。对话框只有一个“OK”（确定）按钮。如果传给 alert()的参数不是一个原始字符串，则会调用这个值的 toString()方法将其转换为字符串。</p><p>警告框（alert）通常用于向用户显示一些他们无法控制的消息，比如报错。用户唯一的选择就是在看到警告框之后把它关闭。图 12-1 展示了一个警告框。</p><p><img src=/images/javascript/12-1.png alt="图 12-1"></p><p>第二种对话框叫确认框，通过调用 confirm()来显示。确认框跟警告框类似，都会向用户显示消息。但不同之处在于，确认框有两个按钮：“Cancel”（取消）和“OK”（确定）。用户通过单击不同的按钮表明希望接下来执行什么操作。比如，confirm(&ldquo;Are you sure?")会显示图 12-2 所示的确认框。</p><p><img src=/images/javascript/12-2.png alt="图 12-2"></p><p>要知道用户单击了 OK 按钮还是 Cancel 按钮，可以判断 confirm()方法的返回值：true 表示单击了 OK 按钮，false 表示单击了 Cancel 按钮或者通过单击某一角上的 X 图标关闭了确认框。确认框的典型用法如下所示：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>confirm</span>(<span style=color:#e6db74>&#34;Are you sure?&#34;</span>)) {
+  <span style=color:#a6e22e>alert</span>(<span style=color:#e6db74>&#34;I&#39;m so glad you&#39;re sure!&#34;</span>);
+} <span style=color:#66d9ef>else</span> {
+  <span style=color:#a6e22e>alert</span>(<span style=color:#e6db74>&#34;I&#39;m sorry to hear you&#39;re not sure.&#34;</span>);
+}
+</code></pre></div><p>在这个例子中，第一行代码向用户显示了确认框，也就是 if 语句的条件。如果用户单击了 OK 按钮，则会弹出警告框显示"I&rsquo;m so glad you&rsquo;re sure!"。如果单击了 Cancel，则会显示"I&rsquo;m sorry to hear you&rsquo;re not sure."。确认框通常用于让用户确认执行某个操作，比如删除邮件等。因为这种对话框会完全打断正在浏览网页的用户，所以应该在必要时再使用。</p><p>最后一种对话框是提示框，通过调用 prompt()方法来显示。提示框的用途是提示用户输入消息。除了 OK 和 Cancel 按钮，提示框还会显示一个文本框，让用户输入内容。prompt()方法接收两个参数：要显示给用户的文本，以及文本框的默认值（可以是空字符串）。调用 prompt(&ldquo;What is your name?&rdquo;, &ldquo;Jake&rdquo;)会显示图 12-3 所示的提示框。</p><p><img src=/images/javascript/12-3.png alt="图 12-3"></p><p>如果用户单击了 OK 按钮，则 prompt()会返回文本框中的值。如果用户单击了 Cancel 按钮，或者对话框被关闭，则 prompt()会返回 null。下面是一个例子：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>result</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>prompt</span>(<span style=color:#e6db74>&#34;What is your name? &#34;</span>, <span style=color:#e6db74>&#34;&#34;</span>);
+<span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>result</span> <span style=color:#f92672>!==</span> <span style=color:#66d9ef>null</span>) {
+  <span style=color:#a6e22e>alert</span>(<span style=color:#e6db74>&#34;Welcome, &#34;</span> <span style=color:#f92672>+</span> <span style=color:#a6e22e>result</span>);
+}
+</code></pre></div><p>这些系统对话框可以向用户显示消息、确认操作和获取输入。由于不需要 HTML 和 CSS，所以系统对话框是 Web 应用程序最简单快捷的沟通手段。</p><p>很多浏览器针对这些系统对话框添加了特殊功能。如果网页中的脚本生成了两个或更多系统对话框，则除第一个之外所有后续的对话框上都会显示一个复选框，如果用户选中则会禁用后续的弹框，直到页面刷新。</p><p>如果用户选中了复选框并关闭了对话框，在页面刷新之前，所有系统对话框（警告框、确认框、提示框）都会被屏蔽。开发者无法获悉这些对话框是否显示了。对话框计数器会在浏览器空闲时重置，因此如果两次独立的用户操作分别产生了两个警告框，则两个警告框上都不会显示屏蔽复选框。如果一次独立的用户操作连续产生了两个警告框，则第二个警告框会显示复选框。</p><p>JavaScript 还可以显示另外两种对话框：find()和 print()。这两种对话框都是异步显示的，即控制权会立即返回给脚本。用户在浏览器菜单上选择“查找”（find）和“打印”（print）时显示的就是这两种对话框。通过在 window 对象上调用 find()和 print()可以显示它们，比如：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#75715e>// 显示打印对话框
+</span><span style=color:#75715e></span>window.<span style=color:#a6e22e>print</span>();
+
+<span style=color:#75715e>// 显示查找对话框
+</span><span style=color:#75715e></span>window.<span style=color:#a6e22e>find</span>();
+</code></pre></div><p>这两个方法不会返回任何有关用户在对话框中执行了什么操作的信息，因此很难加以利用。此外，因为这两种对话框是异步的，所以浏览器的对话框计数器不会涉及它们，而且用户选择禁用对话框对它们也没有影响。</p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#global-作用域>Global 作用域</a></li><li><a href=#窗口关系>窗口关系</a></li><li><a href=#窗口位置与像素比>窗口位置与像素比</a></li><li><a href=#窗口大小>窗口大小</a></li><li><a href=#视口位置>视口位置</a></li><li><a href=#导航与打开新窗口>导航与打开新窗口</a><ul><li><a href=#弹出窗口>弹出窗口</a></li><li><a href=#安全限制>安全限制</a></li><li><a href=#弹窗屏蔽程序>弹窗屏蔽程序</a></li></ul></li><li><a href=#定时器>定时器</a></li><li><a href=#系统对话框>系统对话框</a></li></ul></nav></div></aside></main></body></html>
